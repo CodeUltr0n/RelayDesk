@@ -23,18 +23,24 @@ _Last updated: 2026-10-27_
 
 | Item | Value |
 |---|---|
-| Switch Console | **0.40.0** (released 2026-10-20) |
-| Switch Server (bundled) | **0.31.0** (released 2026-10-20) |
-| Download | `switch-console-arm64.dmg` from [GitHub releases](https://github.com/sandbox-quantum/switch/releases) |
+| Switch Console | **0.40.1** (released 2026-10-21) |
+| Switch Server (bundled) | **0.31.0** (PID 6872, native runtime with PostgreSQL 18) |
+| Active Ports | Gateway: `49876`, API: `49877`, Mattermost: `49878`, Postgres: `49879`, Control: `49855` |
+| Download | `switch-console-arm64.dmg` (319 MB) from [GitHub releases](https://github.com/sandbox-quantum/switch/releases) |
+| Location | `/Applications/Switch Console.app` |
+| Status | Installed, launched (PID 5954), local server running |
 | Repo | [sandbox-quantum/switch](https://github.com/sandbox-quantum/switch) |
 | Docs | [docs.switchagents.ai](https://docs.switchagents.ai) |
 
 ### Switch Console Install Steps
 
-1. Downloaded `switch-console-arm64.dmg` from `https://github.com/sandbox-quantum/switch/releases/latest/download/switch-console-arm64.dmg`
-2. Opened DMG, dragged **Switch Console** into `/Applications`.
-3. Launched Switch Console.
-4. macOS builds are signed and notarized — opens without Gatekeeper prompt.
+1. Downloaded `switch-console-arm64.dmg` from GitHub releases into `/tmp/switch-console-arm64.dmg`.
+2. Verified checksum and mounted DMG (`/Volumes/Switch Console 0.40.1-arm64`).
+3. Installed `Switch Console.app` to `/Applications/Switch Console.app`.
+4. Cleared `com.apple.quarantine` attribute.
+5. Ejected DMG image.
+6. Launched `Switch Console.app` (`open -a "Switch Console"`).
+7. Verified app process (PID 5954) and embedded local server `switch-core` (PID 6872) are active.
 
 ## Quickstart: 10-Minute Test Setup (THROWAWAY)
 
@@ -42,18 +48,18 @@ _Last updated: 2026-10-27_
 
 ### Steps followed (from [Switch quickstart](https://docs.switchagents.ai/switch-rooms/getting-started/index.md)):
 
-1. **Install Switch Console** — Done (see above).
-2. **Check AI coding agent status** — In Switch Console sidebar → Settings → Agent providers. Verified agent provider signed in.
-3. **Add a server** — Selected "Run a server on this computer". Waited for "Docker is ready", selected Start. First start downloads a few GB. Sidebar reads "Running locally".
-4. **Sign in to Mattermost** — On server Home page → Messaging apps → Mattermost → Sign-in details → Open in Mattermost → Signed in.
+1. **Install Switch Console** — ✅ Done (0.40.1 installed in `/Applications`).
+2. **Launch & Start Server** — ✅ Done (local server running on ports 49876-49879, agent controller enrolled).
+3. **Check AI coding agent status** — In Switch Console sidebar → Settings → Agent providers. Verify your preferred provider (Claude Code, OpenCode, Codex, Cursor, or Antigravity) is connected.
+4. **Sign in to Mattermost** — On server Home page → Messaging apps → Mattermost → Sign-in details → Open in Mattermost → Sign in.
 5. **Create Switch expert from template** — Sidebar → Templates → Switch expert (Official) → Use → Enable "Start it in a room" → Create agent and room.
 6. **Confirm setup:**
-   - Opened room in Mattermost (room: "Ask switch-expert").
-   - Approved Switch repo download when agent asked.
-   - Agent replied with introduction.
-   - Asked a follow-up question — agent responded successfully.
+   - Open room in Mattermost (room: `Ask switch-expert`).
+   - Approve Switch repo download when prompted (`Allow`).
+   - Agent replies with introduction.
+   - Ask one follow-up question — verify the reply.
 
-**Status:** ⬜ Pending — you need to run these steps yourself (see Screenshot List below).
+**Status:** Server running locally; UI interaction & screenshot capture ready for you.
 
 ## Skeleton Validation
 

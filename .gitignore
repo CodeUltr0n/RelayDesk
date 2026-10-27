@@ -25,3 +25,4 @@ docker-compose.override.yml
 # Switch
 switch-data/
 *.log
+antigravity-daily-prompts.md
