@@ -11,7 +11,11 @@
 
 ### Done
 
-- [x] **Workspace created:** `relaydesk-workspace/` with `notes/`, `drafts/`, `blog-assets/` (empty). Git initialized (`git init`).
+- [x] **Workspace created & pushed to GitHub:**
+  - `relaydesk-workspace/` initialized with `notes/`, `drafts/`, `blog-assets/`, and `README.md`.
+  - Remote set to `https://github.com/CodeUltr0n/RelayDesk.git`.
+  - Pushed to `origin/main` (commit `67e8e05`).
+  - `relaydesk-skeleton/` remains strictly outside the repository per hackathon rules.
 - [x] **`.gitignore`** configured for Python, Docker, Switch, OS artifacts.
 - [x] **Docker verified:**
   - Docker Engine 28.1.1 (build 4eba377), Compose v2.35.1-desktop.1.
