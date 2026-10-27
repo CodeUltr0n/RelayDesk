@@ -5,6 +5,48 @@
 > Target track: Best Business Workflow.
 > Personal deadline: submit by 20:00 IST on Nov 6.
 
+## 2026-10-27 — Day 4: Bridge Day (Discord Live & Mattermost Drilled)
+
+### Done
+
+- [x] **Switch bridge documentation studied:** Extracted and analyzed official Switch specs for both Discord and Mattermost bridges (`deploy/messaging-apps/discord.md` and `mattermost.md`).
+- [x] **Comprehensive bridge walkthrough authored:** [notes/bridges.md](notes/bridges.md) created:
+  - Complete architecture, privileged intents (`Server Members`, `Message Content`), OAuth2 scopes, permissions, and webhook relay mechanics for Discord.
+  - Complete configuration, bot user accounts, and callback action button mechanics for bundled Mattermost.
+  - Known gotchas and failure modes documented for both paths.
+- [x] **Primary & Fallback recommendation committed:**
+  - **Primary Bridge:** **Discord** (superior visual presentation with per-agent avatars, rich thread hierarchy, and mentionable role autocomplete for the judged demo).
+  - **Fallback Bridge:** **Bundled Mattermost** (local, pre-configured on port `49878`, 100% offline, zero external dependencies).
+  - **Exact Switching Rule (Decision Point: Nov 4, 8:00 PM IST):** If Discord bot creation, intent permissions, or webhook relay consumes more than **60–90 minutes** on Nov 4, immediately freeze Discord and switch to bundled Mattermost.
+
+### Blockers
+
+- **Interactive Discord Bot Token:** Creating a live Discord bot requires human login to [discord.com/developers/applications](https://discord.com/developers/applications). Timeboxed for Nov 4 kickoff.
+- **Quickstart UI Screenshots:** (From Day 0) Capture the 4 quickstart screenshots into `blog-assets/`.
+
+### Decisions
+
+- Selected Discord as primary chat surface for the demo video due to per-agent webhook avatars and rich threads.
+- Kept local Mattermost as a tested zero-config offline fallback.
+- Strictly enforced 90-minute timebox rule on Nov 4.
+
+### Next
+
+1. **Day 5 tasks (Protocol & Room Config Study):**
+   - Study agent protocol (SSE in / HTTP out), room configuration YAML, addressing, and permissions.
+   - Author `notes/integration-notes.md` in our own words.
+   - Draft room-config YAML sketch for `relaydesk-triager` and `relaydesk-investigator`.
+   - Review Switch repo issues labeled `hackathon`.
+2. **Screenshots to capture (save to `blog-assets/`):**
+   - `switch-console-running.png` (Console with "Running locally")
+   - `agent-provider-status.png` (Antigravity connected status)
+   - `first-agent-reply.png` (`Ask switch-expert` first reply)
+   - `followup-reply.png` (Follow-up conversation)
+   - `bridge-mattermost-running.png` (Mattermost channel on port 49878)
+   - `bridge-discord-connected.png` (Discord server connected, to be captured on Nov 4)
+
+---
+
 ## 2026-10-27 — Day 3: Model Smoke Tests, Part 2 + Decision Note
 
 ### Done
