@@ -1,0 +1,101 @@
+# ==============================================================================
+# DRAFT ONLY — PRE-EVENT SKETCH (NO REAL ROOMS CREATED)
+# ==============================================================================
+# Hackathon Constraint: The Switch setup and workflow must be built during the
+# hackathon (Nov 4–7, 2026). This file is an architectural sketch and room
+# configuration blueprint for Day 5 preparation. DO NOT submit or apply this
+# config to the live Switch server prior to kickoff on Nov 4.
+# ==============================================================================
+
+version: 2
+
+room:
+  name: "RelayDesk Evidence-Gated Triage"
+  slug: "relaydesk-triage-room"
+  description: >
+    Customer support issue triage and engineering escalation chamber.
+    Agents evaluate customer bug reports, query docs/issues, rank evidence,
+    and propose triage decisions (ANSWER, CLARIFY, DUPLICATE, ESCALATE)
+    subject to mandatory human approval.
+  visibility: private
+
+messaging:
+  bridge: discord             # Primary bridge (timeboxed 90m on Nov 4)
+  fallback_bridge: mattermost # Local Docker fallback on port 49878
+  channel: relaydesk-triage
+  thread_mode: always         # Keep multi-turn evidence debates grouped per ticket thread
+
+instructions: |
+  You are participating in the RelayDesk customer issue triage room.
+  All agents and human operators in this room adhere to the following principles:
+
+  1. EVIDENCE-GATED DECISIONS:
+     Never suggest an outcome without a ranked evidence shortlist (top-3 candidates).
+     Valid outcomes:
+       - ANSWER (confidence >= 0.65 with verified documentation match)
+       - CLARIFY (confidence 0.45 to 0.64; missing repro steps or environment info)
+       - DUPLICATE (confidence >= 0.75 with matching symptom and component)
+       - ESCALATE (regression, security issue, or verified reproduction failure)
+
+  2. HUMAN APPROVAL REQUIRED:
+     Every customer-facing reply, ticket status transition, or engineering escalation
+     requires explicit human operator sign-off via action button or confirmation reply.
+
+  3. THREADED DISCUSSIONS:
+     When a new ticket is posted, start a new thread. All evidence cards, candidate
+     matches, and investigator logs must remain inside the ticket's thread.
+
+  4. LOG SAFETY & HYGIENE:
+     Never echo more than 20 lines of raw customer error logs. Summarize error traces
+     and highlight the root cause.
+
+agents:
+  - name: relaydesk-triager
+    display_name: "RelayDesk Triager"
+    role: triage-lead
+    provider: antigravity     # Primary: antigravity (ACP); Fallback: rule-engine-v1
+    addressing: anyone        # Anyone in the room (support agents, leads) can invoke via @mention
+    description: >
+      Frontline triage agent. Ingests incoming support tickets, computes symptom
+      and component similarity against historical issues, presents ranked Evidence Cards,
+      and drafts proposed triage decisions.
+    permissions:
+      - read_channel_messages
+      - post_messages
+      - request_approval
+      - trigger_thread
+      - invoke_owner_agents
+
+  - name: relaydesk-investigator
+    display_name: "RelayDesk Investigator"
+    role: patch-verifier
+    provider: antigravity     # Primary: antigravity (ACP); Fallback: rule-engine-v1
+    addressing: owner-agents  # Only human room owner and companion owner agents (relaydesk-triager) can invoke
+    description: >
+      Technical investigation agent. Runs sandboxed reproduction scripts, verifies
+      regression tests in isolated Docker environments, and reports reproduction evidence
+      back to the ticket thread. Protected from direct public invocation.
+    permissions:
+      - read_thread_messages
+      - post_messages
+      - run_sandboxed_command
+      - attach_test_artifacts
+
+kickoff_message: |
+  **RelayDesk Evidence-Gated Triage Room Initialized** 🛎️
+
+  Welcome to the triage coordination desk. This room connects support engineers
+  and Switch agents to resolve customer issues with auditable evidence.
+
+  **Registered Agents:**
+  • `@relaydesk-triager` (`addressing: anyone`): Ingests tickets, matches symptoms, ranks evidence, and drafts triage cards.
+  • `@relaydesk-investigator` (`addressing: owner-agents`): Deep-dives into technical regressions and executes sandboxed repro tests upon triage delegation.
+
+  **Triage Outcomes:**
+  1. `[ANSWER]` — Grounded solution from docs with verified citations.
+  2. `[CLARIFY]` — Missing environment or logs; draft clarification prompt.
+  3. `[DUPLICATE]` — Matches known active issue (similarity >= 0.75).
+  4. `[ESCALATE]` — Verified code defect; packages repro test for engineering.
+
+  *Human-in-the-Loop:* No automated actions are dispatched without human confirmation.
+  To begin triage on a customer report, paste a ticket card or mention `@relaydesk-triager`.

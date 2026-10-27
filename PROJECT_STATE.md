@@ -5,6 +5,55 @@
 > Target track: Best Business Workflow.
 > Personal deadline: submit by 20:00 IST on Nov 6.
 
+## 2026-10-27 — Day 5: Protocol & Room Config Study
+
+### Done
+
+- [x] **Switch protocol and room model studied:**
+  - Transport: WebSocket inbound (`/agents/{agent_id}/connection/ws`) + HTTP REST outbound (`/agents/{agent_id}/ops/*`).
+  - Liveness and reconnect mechanics: Monotonic `cursor` tracking, `generation` UUIDs, periodic ping frames.
+  - Human-in-the-loop patterns: Approval action cards (`/ops/request_approval`), callback payloads, button and text reply fallback.
+- [x] **Addressing & permissions model analyzed:**
+  - Evaluated `anyone`, `owner_and_owner_agents`, and `owner_only` addressing policies.
+  - Assigned `addressing: anyone` to `relaydesk-triager` for open support team ingestion.
+  - Assigned `addressing: owner_and_owner_agents` to `relaydesk-investigator` to protect sandboxed test execution and model tokens from direct external triggers.
+- [x] **Integration notes authored:** [notes/integration-notes.md](notes/integration-notes.md) written in own words:
+  - How rooms, agents, and addressing operate.
+  - Full anatomy of a room configuration file (metadata, messaging, instructions, agents, documents, kickoff_message).
+  - The 3 biggest integration risks for a 4-day solo build (Addressing & permission lockout, multi-agent ping-pong loops, WebSocket cursor disconnect during screencast recording).
+  - 3 interesting Switch repository issues labeled `hackathon` (ticket tracker connectors, generic webhook bridges, HITL card callbacks) and RelayDesk takeaways.
+- [x] **DRAFT room configuration authored:** [config/room-config.draft.yaml](config/room-config.draft.yaml):
+  - Prominently tagged `DRAFT ONLY — PRE-EVENT SKETCH (NO REAL ROOMS CREATED)` per hackathon rules.
+  - Configures `relaydesk-triager` (`addressing: anyone`, role `triage-lead`, provider `antigravity`).
+  - Configures `relaydesk-investigator` (`addressing: owner-agents`, role `patch-verifier`, provider `antigravity`).
+  - Defines threaded discussion policy, top-3 ranked evidence requirements, and human sign-off rules.
+  - Includes a comprehensive kickoff message card.
+
+### Blockers
+
+- **None:** Protocol, addressing, and configuration schemas fully documented. Strict adherence to hackathon provenance maintained (zero real Switch rooms or workflow built prior to Nov 4).
+- **Screenshots:** (From Day 0) Capture the quickstart screenshots into `blog-assets/` when convenient.
+
+### Decisions
+
+- `relaydesk-triager` addressing set to `anyone` so any room member can invoke triage.
+- `relaydesk-investigator` addressing set to `owner-agents` (`owner_and_owner_agents`) so only the room owner or `relaydesk-triager` can delegate sandbox repro workloads.
+- Thread mode set to `always` in room config to keep investigation evidence cards grouped cleanly per ticket.
+- Both agents configured with primary provider `antigravity` (ACP) and fallback provider `rule-engine-v1`.
+
+### Next
+
+1. **Pre-Kickoff readiness:** Review all pre-event artifacts (`notes/environment.md`, `notes/model_decision.md`, `notes/bridges.md`, `notes/integration-notes.md`, `config/room-config.draft.yaml`).
+2. **Screenshots to capture (save to `blog-assets/`):**
+   - `switch-console-running.png` (Console with "Running locally")
+   - `agent-provider-status.png` (Antigravity connected status)
+   - `first-agent-reply.png` (`Ask switch-expert` first reply)
+   - `followup-reply.png` (Follow-up conversation)
+   - `bridge-mattermost-running.png` (Mattermost channel on port 49878)
+   - `bridge-discord-connected.png` (Discord server connected, to be captured on Nov 4)
+
+---
+
 ## 2026-10-27 — Day 4: Bridge Day (Discord Live & Mattermost Drilled)
 
 ### Done
