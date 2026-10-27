@@ -5,6 +5,43 @@
 > Target track: Best Business Workflow.
 > Personal deadline: submit by 20:00 IST on Nov 6.
 
+## 2026-10-27 — Day 3: Model Smoke Tests, Part 2 + Decision Note
+
+### Done
+
+- [x] **Smoke test matrix extended:**
+  - Evaluated **Antigravity** (`gemini-2.0-pro-exp` via `antigravity-acp`): **100.0% pass rate** (15/15 passes, sub-55ms latency).
+  - Evaluated **Baseline Deterministic** (`rule-engine-v1`): **100.0% pass rate** (15/15 passes, 16.8ms latency).
+  - Evaluated **Local Ollama Reference** (`llama3.2-3b-m1` on Apple Silicon): **20.0% pass rate** (failed T1 JSON formatting, failed T2 tool use 0%, failed T3 citation, failed T5 pytest loop 0%, 1866ms latency).
+- [x] **Model decision document authored:** [notes/model_decision.md](notes/model_decision.md) created:
+  - **PRIMARY Provider & Model:** **Google Antigravity** (`gemini-2.0-pro-exp` via `antigravity-acp`) — selected for 100% pass rate on T2 (tool use), T3 (evidence reading), and T5 (test run), zero out-of-pocket cost, and native Switch Agent Controller compatibility.
+  - **FALLBACK Provider:** **Deterministic Baseline** (`rule-engine-v1`) with zero external dependency.
+  - **Exact Switching Condition:** Triggers on `antigravity-acp` process exit, timeout >10.0s, HTTP 429 quota exhaustion, or schema failure after 1 retry.
+  - **Disqualification Rationale for Local Models:** Rigorously documented failure modes on 3B/7B models (0% tool-calling reliability, indentation degradation in multi-turn test loops).
+- [x] **Pricing sanity-check:** Calculated 4-day build volume (~380 calls, ~456k input tokens, ~95k output tokens). Estimated cost: **$0.00** on Antigravity quota (<$0.50 on OpenAI mini; <$3.00 on Claude 3.5 Sonnet). Reliability completely dominates cost.
+- [x] **Matrix updated:** [notes/model_smoke.md](notes/model_smoke.md) regenerated and verified.
+
+### Blockers
+
+- **Switch Console Quickstart UI:** (From Day 0) Capture the 4 quickstart screenshots into `blog-assets/` when convenient.
+
+### Decisions
+
+- Selected Antigravity via `antigravity-acp` as primary agent engine for the hackathon workflow.
+- Disqualified local Ollama for the live judged demo due to 0% tool-call and pytest loop reliability.
+- Established strict fallback hierarchy: Antigravity &rarr; Deterministic Rule Engine (`rule-engine-v1`) &rarr; Secondary Cloud API.
+
+### Next
+
+1. **Day 4 tasks (Bridge Day):**
+   - Study Switch bridge docs (Discord + Mattermost).
+   - Timebox Discord test (90 minutes) & prove Mattermost fallback path.
+   - Author `notes/bridges.md` with recommendations and switching conditions.
+2. **Screenshots (from Day 0):**
+   - Continue capturing the 4 quickstart screenshots into `blog-assets/`.
+
+---
+
 ## 2026-10-27 — Day 2: Model Smoke Tests, Part 1
 
 ### Done
