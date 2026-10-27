@@ -5,6 +5,41 @@
 > Target track: Best Business Workflow.
 > Personal deadline: submit by 20:00 IST on Nov 6.
 
+## 2026-10-27 — Day 2: Model Smoke Tests, Part 1
+
+### Done
+
+- [x] **Smoke test harness built:** `notes/smoke_runner.py` created to run 5 repeatable tasks across candidate providers with 3 repetitions each.
+- [x] **Smoke test fixtures created:** `notes/smoke_fixtures/` populated with:
+  - `schema_t1.json` & `input_t1.json`: Triage schema validation fixture for T1.
+  - `docs/` (`auth_guide.md`, `rate_limits.md`, `database_errors.md`): File discovery fixture for T2.
+  - `runbook_snippet.md`: Factual runbook extraction (RB-402, 45.0s timeout, section citation) for T3.
+  - `broken_code.py` & `test_broken_code.py`: Priority score calculation bug & pytest validation suite for T4 & T5.
+- [x] **Ran smoke tests for 2 available providers:**
+  - `baseline-deterministic` (`rule-engine-v1`): **100.0% pass rate** (15/15 passes, avg latency 17.2ms).
+  - `local-heuristic-fallback` (`heuristic-v1`): **100.0% pass rate** (15/15 passes, avg latency 6.3ms).
+- [x] **External cloud provider status recorded:** Checked environment for cloud providers; recorded `OPENAI_API_KEY` and `GEMINI_API_KEY` status as unavailable in local shell.
+- [x] **Matrix documented:** Complete matrix with latencies, cost, pass rates, and failure notes recorded in `notes/model_smoke.md`.
+
+### Blockers
+
+- **Optional Provider API Keys:** If you want live cloud provider benchmarks included alongside the local runners, provide the environment variable name (`OPENAI_API_KEY` or `GEMINI_API_KEY`). Not a hard blocker — harness works completely autonomously.
+- **Switch Console Quickstart UI:** (From Day 0) Capture the 4 quickstart screenshots when convenient.
+
+### Decisions
+
+- T3 requires strict citation of runbook section and exact parameter value; unauthorized immediate retries flag as hallucination.
+- T5 test runner requires clean pytest pass within 3 iterations; sandbox cleanup is automated per attempt.
+- Harness stays inside `notes/` as a pre-event evaluation tool (clean separation from submission pipeline).
+
+### Next
+
+1. **Day 3 tasks:**
+   - Extend matrix to a 3rd provider and document local Ollama reference.
+   - Author `notes/model_decision.md` with primary & fallback provider selection, trigger conditions, and 4-day cost projection.
+2. **Screenshots (from Day 0):**
+   - Capture the 4 quickstart screenshots into `blog-assets/` (`switch-console-running.png`, `agent-provider-status.png`, `first-agent-reply.png`, `followup-reply.png`).
+
 ---
 
 ## 2026-10-27 — Day 0: Environment Setup & Skeleton Validation

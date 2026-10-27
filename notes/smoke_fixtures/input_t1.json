@@ -1,0 +1,11 @@
+{
+  "ticket_id": "TCK-8921",
+  "customer_tier": "enterprise",
+  "summary": "504 Gateway Timeout during batch invoice sync",
+  "description": "Our automated pipeline started failing with HTTP 504 on endpoint /api/v2/invoices/batch at 08:30 UTC. Retrying with identical payload returns the same timeout after exactly 45 seconds.",
+  "telemetry": {
+    "error_code": 504,
+    "latency_ms": 45000,
+    "endpoint": "/api/v2/invoices/batch"
+  }
+}
