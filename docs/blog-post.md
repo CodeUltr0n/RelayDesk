@@ -1,6 +1,6 @@
 # Building RelayDesk: Evidence-Gated Multi-Agent Support Triage on Switch AI
 
-*By Ketan Kumar Chokkara (@CodeUltr0n) — Built for the Flip the Switch Hackathon (Nov 4–7, 2026)*
+*By Ketan Kumar Chokkara — AI Engineer & Data Scientist from India ([@CodeUltr0n](https://github.com/CodeUltr0n)) — Built for the Flip the Switch Hackathon (Nov 4–7, 2026)*
 
 ---
 
@@ -168,3 +168,4 @@ To prove that RelayDesk performs reliably beyond one-off demos, we built an auto
 
 ---
 *Thank you to WeMakeDevs and Switch AI for hosting the Flip the Switch Hackathon!*
+
