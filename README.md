@@ -27,14 +27,34 @@ Frontline support teams face a painful trade-off:
 
 ## How Switch is Used (30% Rubric Priority)
 
-Switch is the essential collaboration and audit layer of RelayDesk. If Switch is removed, the multi-agent coordination, human sign-off, and audit trail completely collapse:
+Switch is the essential collaboration and audit backbone of RelayDesk. Without Switch, the multi-agent orchestration, peer-to-peer handoffs, human sign-off, and audit trail completely collapse.
 
-1. **Shared Team Room (`relaydesk-triage`):** Support leads, triage agents, and investigation bots interact in a single shared room bridged to Discord or Mattermost.
-2. **Explicit Agent Roles & Addressing Policies:**
-   - `@relaydesk-triager` (`addressing: anyone`): Public frontline agent. Ingests raw messages, extracts signatures, searches the knowledge base, ranks evidence, and drafts cards.
-   - `@relaydesk-investigator` (`addressing: owner_and_owner_agents`): Deep investigation agent. Protected from external triggers; invoked by `@relaydesk-triager` to execute sandboxed test reproduction.
-3. **Threaded Audit Trail:** Every customer ticket creates a dedicated room thread holding the `[EVIDENCE]` Card, `[DECISION]` Card, reproduction artifacts, and final `[CASE]` Record.
-4. **Mandatory Human Approval:** Triage proposals surface approval callbacks (`/ops/request_approval`), requiring support lead sign-off before customer messages are dispatched.
+### 1. Which Agents Are Connected
+
+| Agent | Provider | Addressing Policy | Role & Responsibilities |
+|---|---|---|---|
+| **`@relaydesk-triager`** | Antigravity | `anyone` (Public frontline) | First-responder triage bot. Ingests raw incident text, extracts error signatures & component metadata via regex normalization, queries the deterministic retrieval index, computes weighted 4-feature evidence scores, and renders formatted `[EVIDENCE]` and `[DECISION]` cards. Always requires human sign-off before customer-facing action. |
+| **`@relaydesk-investigator`** | Antigravity | `ownerAndAgents` (Restricted handoff) | Deep technical investigation bot. Wakes up only when tagged by human leads or delegated by `@relaydesk-triager` upon `ESCALATE` decisions. Spawns disposable temp-copy sandboxes, runs allow-listed test suites (`pytest`), captures assertion failures, and posts verified `[REPRODUCTION RESULT]` cards for engineering review. |
+
+### 2. How the Channel / Room is Set Up
+
+RelayDesk operates inside a shared room (`#support-triage`) bridged to Discord via Switch:
+
+1. **Discord Bridge Setup:**
+   - In Discord Developer Portal, create an Application and Bot.
+   - Under **Bot > Privileged Gateway Intents**, enable **Server Members Intent** and **Message Content Intent**.
+   - Invite the bot to your Discord server with `Administrator` / `Manage Channels` permissions.
+   - In **Switch Console > Settings > Bridges > Discord**, paste the Bot Token and connect the bridge.
+
+2. **Room Configuration:**
+   - In Switch Console, create a room named `#support-triage` (or import [`config/room-config.draft.yaml`](config/room-config.draft.yaml)).
+   - Add `@relaydesk-triager` and `@relaydesk-investigator` to the room, pointing their working directories to the repository root.
+   - Configure `@relaydesk-triager` with `addressing: anyone` and `@relaydesk-investigator` with `addressing: ownerAndAgents` (with command execution permissions enabled for sandbox reproduction).
+
+3. **Threaded Audit Trail & Human Approval:**
+   - Every incident report triggers a distinct investigation thread.
+   - Triage proposals pause automatically with a mandatory approval step (`Awaiting human operator approval before dispatching customer replies or closing this ticket`).
+   - The human support lead retains absolute authority to approve, override, or request deeper sandbox reproduction.
 
 ---
 
@@ -88,6 +108,22 @@ make test
 make eval-relaydesk   # Evaluate on dev split
 make eval-heldout     # Evaluate on strict held-out split
 ```
+
+### 5. Run Live in Discord via Switch
+Once the Switch Discord bridge is active, post an incident report in `#support-triage`:
+
+**Scenario 1 — Automated Duplicate Triage:**
+```
+@relaydesk-triager Customer reports payment total mismatch (HTTP 500) on checkout-service v2.14.0 since this morning's release.
+```
+> `@relaydesk-triager` parses the report, queries the corpus, scores candidates, outputs the `[EVIDENCE]` Card highlighting `INC-1042` (confidence 0.86), posts `[DECISION] DUPLICATE`, and pauses for human operator approval.
+
+**Scenario 2 — Escalation & Sandboxed Reproduction Handoff:**
+```
+@relaydesk-triager Customer reports discount calculation failure in price_calculator on 10% discount orders. checkout-service v2.14.0. No matching past incident. Please escalate to @relaydesk-investigator to run reproduction tests in the sandbox.
+```
+> `@relaydesk-triager` flags the novel defect, outputs `[DECISION] ESCALATE`, and delegates to `@relaydesk-investigator`.  
+> `@relaydesk-investigator` spins up a disposable sandbox, runs `pytest`, captures the `ROUND_DOWN` vs `ROUND_HALF_UP` 1-cent mismatch assertion failure, and posts a verified `[REPRODUCTION RESULT]` card with root cause analysis.
 
 ---
 
@@ -146,7 +182,8 @@ relaydesk/
 │   ├── architecture.md          # In-depth architectural design
 │   ├── evaluation.md            # Detailed benchmark breakdown
 │   ├── safety.md                # Security, isolation, and untrusted data model
-│   └── demo-script.md           # 3-minute judged screencast walkthrough
+│   ├── demo-script.md           # 3-minute judged screencast walkthrough
+│   └── blog-post.md             # In-depth technical writeup for hackathon submission
 ├── scripts/
 │   └── run_eval.py              # Reproducible benchmark runner
 ├── Makefile                     # Shortcut targets (test, eval, eval-relaydesk)
@@ -161,6 +198,7 @@ relaydesk/
 - [Benchmark Evaluation Report](docs/evaluation.md)
 - [Safety & Isolation Model](docs/safety.md)
 - [3-Minute Demo Video Script](docs/demo-script.md)
+- [Technical Blog Post](docs/blog-post.md)
 - [Switch Integration Notes](notes/integration-notes.md)
 - [Bridge Configuration Guide](notes/bridges.md)
 - [Model Evaluation Smoke Tests](notes/model_smoke.md)
