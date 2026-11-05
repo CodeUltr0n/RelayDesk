@@ -25,3 +25,4 @@ When `relaydesk-investigator` runs verification tests on a reported regression:
 - All evaluation fixtures and tickets use synthetic data.
 - No real customer PII, customer credentials, or production tokens exist in the repository or git history.
 - The pipeline runs completely offline without sending data to external APIs.
+

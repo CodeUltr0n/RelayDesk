@@ -24,3 +24,4 @@
 - [ ] Both agents (`@relaydesk-triager`, `@relaydesk-investigator`) active in the room.
 - [ ] Terminal open on side with clean font size (for `make test` / `make eval` proof).
 - [ ] Microphone tested; no personal tokens or private API keys visible on screen.
+

@@ -21,7 +21,7 @@
           "correct": true,
           "top3_hit": true,
           "unsupported_assertions": 0,
-          "latency_ms": 1.5
+          "latency_ms": 1.7
         },
         {
           "case_id": "case_clarify_001",
@@ -99,7 +99,7 @@
           "correct": true,
           "top3_hit": true,
           "unsupported_assertions": 0,
-          "latency_ms": 0.4
+          "latency_ms": 0.5
         }
       ]
     }

@@ -81,3 +81,4 @@ Evaluation cases are split into:
 1. **Zero Engineering Noise**: 100% escalation precision means zero non-bug cases were escalated to engineering.
 2. **Zero Bug Leaks**: 100% escalation recall ensures every genuine novel regression was caught and surfaced.
 3. **Sub-Millisecond Speed**: Median decision time is under **0.5 ms**, making it completely transparent in real-time chat rooms.
+

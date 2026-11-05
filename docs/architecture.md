@@ -73,3 +73,4 @@ For technical escalations requiring patch or reproduction verification:
 - Enforces strict execution timeouts and best-effort network blocking.
 - Restricts commands strictly to allow-listed binaries (`pytest`, `python3`, `make`).
 - Truncates logs to avoid log flooding and prompt injection risks.
+
