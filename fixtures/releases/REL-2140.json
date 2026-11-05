@@ -1,0 +1,9 @@
+{
+  "id": "REL-2140",
+  "title": "Release v2.14.0 — Checkout service discount overhaul",
+  "component": "checkout-service",
+  "version": "v2.14.0",
+  "date": "2026-11-03",
+  "body": "Release v2.14.0 deployed 2026-11-03. Changes: Rewrote discount calculation engine in checkout-service for multi-tier pricing support. Migrated from float arithmetic to Decimal. Updated price_calculator.py rounding logic. Known risk: rounding behavior change may affect edge cases with stacked discounts. Rollback plan: revert to v2.13.2 tag."
+}
+

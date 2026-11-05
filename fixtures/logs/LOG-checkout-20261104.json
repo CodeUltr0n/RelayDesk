@@ -1,0 +1,10 @@
+{
+  "id": "LOG-checkout-20261104",
+  "title": "checkout-service error log 2026-11-04",
+  "component": "checkout-service",
+  "version": "v2.14.0",
+  "date": "2026-11-04",
+  "error_signature": "payment total mismatch",
+  "body": "2026-11-04T08:14:22Z ERROR checkout-service payment total mismatch: cart_total=149.97 payment_amount=149.98 order_id=ORD-88421\n2026-11-04T08:15:01Z ERROR checkout-service payment total mismatch: cart_total=299.94 payment_amount=299.95 order_id=ORD-88422\n2026-11-04T08:15:33Z ERROR checkout-service payment total mismatch: cart_total=49.99 payment_amount=50.00 order_id=ORD-88423\n2026-11-04T08:22:10Z WARN checkout-service discount rounding fallback triggered for order ORD-88424\n2026-11-04T08:30:00Z INFO checkout-service health check OK"
+}
+

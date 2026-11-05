@@ -1,0 +1,18 @@
+{
+  "case_id": "case_escalate_001",
+  "title": "New crash in notification-service — no prior incidents",
+  "report": {
+    "author": "support-lead",
+    "text": "Three customers report push notifications arriving 30 minutes late or not at all. notification-service logs show 'queue consumer stalled' errors. Started after last night's infrastructure change. No known past incidents for this error.",
+    "component": "notification-service",
+    "version": "v4.1.0",
+    "first_seen": "2026-11-05",
+    "error_signature": "queue consumer stalled"
+  },
+  "label": "ESCALATE",
+  "expected_evidence_ids": [],
+  "technical_signals": true,
+  "split": "dev",
+  "notes": "No matching evidence in the corpus. Must escalate to engineering with available context."
+}
+

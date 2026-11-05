@@ -1,0 +1,18 @@
+{
+  "case_id": "case_answer_001",
+  "title": "Checkout 500 — answerable from runbook RB-401",
+  "report": {
+    "author": "support-lead",
+    "text": "Customer hitting HTTP 500 on checkout with error payment processing failed. They're on v2.14.0 of checkout-service. Started seeing it today.",
+    "component": "checkout-service",
+    "version": "v2.14.0",
+    "first_seen": "2026-11-04",
+    "error_signature": "payment processing failed"
+  },
+  "label": "ANSWER",
+  "expected_evidence_ids": ["checkout_troubleshooting"],
+  "technical_signals": true,
+  "split": "dev",
+  "notes": "Runbook RB-401 covers this exact scenario. Draft a grounded response citing the runbook."
+}
+

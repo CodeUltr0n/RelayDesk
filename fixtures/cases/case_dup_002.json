@@ -1,0 +1,18 @@
+{
+  "case_id": "case_dup_002",
+  "title": "Another checkout 500 report — duplicate of INC-1042",
+  "report": {
+    "author": "support-lead",
+    "text": "Yet another customer with checkout failing. HTTP 500 with payment total mismatch error. checkout-service v2.14.0. This is the fourth report in the last 2 hours.",
+    "component": "checkout-service",
+    "version": "v2.14.0",
+    "first_seen": "2026-11-04",
+    "error_signature": "payment total mismatch"
+  },
+  "label": "DUPLICATE",
+  "expected_evidence_ids": ["INC-1042"],
+  "technical_signals": true,
+  "split": "heldout",
+  "notes": "Clear duplicate of INC-1042 with matching component, version, and error signature."
+}
+

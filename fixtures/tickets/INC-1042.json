@@ -1,0 +1,12 @@
+{
+  "id": "INC-1042",
+  "title": "Checkout HTTP 500 — payment total mismatch after v2.14.0 rollout",
+  "component": "checkout-service",
+  "version": "v2.14.0",
+  "date": "2026-11-03",
+  "error_signature": "payment total mismatch",
+  "body": "Multiple customers report checkout failure with HTTP 500. Error trace shows 'payment total mismatch' in checkout-service after the v2.14.0 deployment. Root cause: discount rounding logic changed in price_calculator.py line 87. Fix merged in hotfix/v2.14.1 — awaiting QA sign-off.",
+  "status": "open",
+  "assignee": "eng-payments"
+}
+

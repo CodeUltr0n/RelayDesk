@@ -1,0 +1,14 @@
+{
+  "case_id": "case_clarify_002",
+  "title": "Mobile app crash — no details provided",
+  "report": {
+    "author": "support-lead",
+    "text": "Customer says the app crashes when they try to upload their profile picture. No device model, OS version, or app version mentioned. No crash log attached."
+  },
+  "label": "CLARIFY",
+  "expected_evidence_ids": [],
+  "technical_signals": false,
+  "split": "heldout",
+  "notes": "Missing component, version, first_seen. Must ask a targeted clarifying question."
+}
+

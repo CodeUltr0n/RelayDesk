@@ -1,0 +1,9 @@
+{
+  "id": "REL-3021",
+  "title": "Release v3.2.1 — Search service reindex improvements",
+  "component": "search-service",
+  "version": "v3.2.1",
+  "date": "2026-10-27",
+  "body": "Release v3.2.1 deployed 2026-10-27. Changes: Improved reindex job performance by 40%. Added parallel bulk loading. NOTE: alias swap step was refactored but not fully tested with the new parallel loader. Known issue: alias may not swap correctly if the bulk load finishes out of order."
+}
+

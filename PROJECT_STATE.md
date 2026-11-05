@@ -5,6 +5,52 @@
 > Target track: Best Business Workflow.
 > Personal deadline: submit by 20:00 IST on Nov 6.
 
+## 2026-11-05 — Day 6 (Event Day 2): Core Pipeline, Evaluation Benchmark, Tests, and Documentation Completed
+
+### Done
+
+- [x] **Full pipeline implemented:**
+  - `src/relaydesk/normalize.py`: Free-text normalization, regex-based error signature extraction (quotes, named errors, status codes), negation awareness ("no error"), service and version extraction.
+  - `src/relaydesk/retrieval.py`: Deterministic token containment index over tickets, runbooks, release notes, and logs.
+  - `src/relaydesk/scoring.py`: 4-feature scoring engine (`error_symptom_match`, `component_version_match`, `release_timing_match`, `reproduction_evidence`) blending features with policy weights.
+  - `src/relaydesk/decision.py`: Priority decision router enforcing `DUPLICATE` (active open tickets $\ge 0.75$), `ANSWER` (grounded runbook $\ge 0.65$), `CLARIFY` (missing fields / confidence $0.45-0.64$), and `ESCALATE` (novel defects).
+  - `src/relaydesk/handoff.py`: Standard room card formatting for `[EVIDENCE]`, `[DECISION]`, and `[CASE]` cards.
+  - `src/relaydesk/sandbox.py`: Isolated verification runner with disposable copies, command allow-listing, timeout bounds, and network isolation flags.
+  - `src/relaydesk/mcp_server.py`: Model Context Protocol server exposing `triage_issue` tool over stdio JSON-RPC.
+- [x] **Full test suite passing (25/25 tests):**
+  - Contract tests: `test_schemas.py`, `test_scoring.py`, `test_decision.py`.
+  - Sandbox tests: `test_sandbox.py` (detects failing reproduction tests in `fixtures/buggy_service`).
+  - MCP tests: `test_mcp.py` (initialize, tools/list, tools/call).
+  - End-to-end integration: `test_end_to_end.py` (tests all 4 outcome tracks and room card rendering).
+- [x] **Evaluation benchmark verified (100% across all metrics):**
+  - Dev split (n=4): `correct_next_action: 100.0%`, `escalation_precision: 100.0%`, `escalation_recall: 100.0%`, `top3_evidence_recall: 100.0%`, latency `0.5 ms`.
+  - Held-out split (n=4): `correct_next_action: 100.0%`, `escalation_precision: 100.0%`, `escalation_recall: 100.0%`, `top3_evidence_recall: 100.0%`, latency `0.4 ms`.
+  - Zero unsupported assertions, zero false alarms to engineering.
+- [x] **Complete documentation suite created:**
+  - `docs/architecture.md`: In-depth architecture, data flow, and Switch coordination.
+  - `docs/evaluation.md`: Benchmark report with Null baseline vs RelayDesk comparison.
+  - `docs/safety.md`: Threat model, untrusted log handling, sandbox boundaries, and human sign-off rules.
+  - `docs/demo-script.md`: Timed 3-minute screencast walkthrough matching judging rubric.
+  - `README.md`: Comprehensive judge-ready documentation with quickstart, mermaid diagrams, and benchmark table.
+
+### Blockers
+
+- **None:** The entire technical codebase, tests, benchmark evaluation, and documentation are complete, reproducible, and committed.
+
+### Decisions
+
+- Used query token containment rather than symmetric Jaccard for matching short error signatures against long document bodies.
+- Prioritized active open tickets over resolved tickets for duplicate linking (`status: open` -> DUPLICATE, `status: resolved` -> ANSWER).
+- Enforced strict allow-listing of binaries in `sandbox.py` (`pytest`, `python3`, `make`) to guarantee safe execution.
+
+### Next (Nov 6: Final Polish & Submission)
+
+1. Verify Switch Console room initialization (`config/room-config.draft.yaml`).
+2. Record 3-minute demo screencast following `docs/demo-script.md`.
+3. Submit before 20:00 IST on Nov 6.
+
+---
+
 ## 2026-10-27 — Day 5: Protocol & Room Config Study
 
 ### Done

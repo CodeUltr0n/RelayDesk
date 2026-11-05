@@ -1,0 +1,22 @@
+# RelayDesk policy — every tunable lives here; code must NOT hardcode these.
+# Tune on the dev split only. Never tune on the held-out split.
+
+weights:
+  error_symptom_match: 0.35        # same observable failure?
+  component_version_match: 0.25    # same service and/or affected version?
+  release_timing_match: 0.20       # appeared around the evidence's change window?
+  reproduction_evidence: 0.20      # direct repro or failing test attached?
+
+thresholds:
+  duplicate_min: 0.75              # suggest DUPLICATE only above this
+  answer_min: 0.65                 # draft ANSWER only above this, with grounded evidence
+  clarify_floor: 0.45              # between floor and answer_min -> CLARIFY
+  top_k_shortlist: 3               # candidates shown on the Evidence Card
+
+safety:
+  human_approval_required: true    # never auto-send customer-facing messages
+  max_log_echo_lines: 20           # never echo untrusted logs beyond this
+  sandbox:
+    timeout_s: 120
+    network: "disabled"            # best-effort; document what you actually did
+    disposable_copy: true          # always copy, never run in place

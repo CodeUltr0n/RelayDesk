@@ -1,0 +1,12 @@
+{
+  "id": "INC-1045",
+  "title": "User profile image upload silently fails on Safari iOS 17",
+  "component": "profile-service",
+  "version": "v1.8.0",
+  "date": "2026-11-01",
+  "error_signature": "multipart boundary parse error",
+  "body": "Safari on iOS 17 sends multipart form data with a boundary that includes extra whitespace. The profile image upload endpoint rejects it silently, returning HTTP 200 but not persisting the image. Affects approximately 12% of mobile upload attempts. No server-side error logged — the parser skips malformed boundaries.",
+  "status": "open",
+  "assignee": "eng-mobile"
+}
+

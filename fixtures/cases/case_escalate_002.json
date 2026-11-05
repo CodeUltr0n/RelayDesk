@@ -1,0 +1,18 @@
+{
+  "case_id": "case_escalate_002",
+  "title": "Database connection pool exhaustion — novel issue",
+  "report": {
+    "author": "support-lead",
+    "text": "Multiple services returning HTTP 503 intermittently. Database monitoring shows connection pool at 100% capacity. Started after the cron job schedule change at 3 AM. No matching incident in history.",
+    "component": "database-proxy",
+    "version": "v1.2.0",
+    "first_seen": "2026-11-05",
+    "error_signature": "connection pool exhausted"
+  },
+  "label": "ESCALATE",
+  "expected_evidence_ids": [],
+  "technical_signals": true,
+  "split": "heldout",
+  "notes": "Novel issue with no prior incidents or runbook coverage. Must escalate."
+}
+

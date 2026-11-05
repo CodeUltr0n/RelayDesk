@@ -17,29 +17,29 @@ _Date: 2026-10-27 | Flip the Switch Hackathon (Day 2/3 Pre-Event Evaluation)_
 ### Provider: `antigravity` (Model: `gemini-2.0-pro-exp`)
 | Task | Repetitions | Pass Rate | Avg Latency (ms) | Est. Cost / Task | Failure Notes |
 |---|---|---|---|---|---|
-| T1 | 3/3 | **100.0%** | 49.62 ms | $0.00000 | All 3 passes clean |
-| T2 | 3/3 | **100.0%** | 52.86 ms | $0.00000 | All 3 passes clean |
-| T3 | 3/3 | **100.0%** | 46.68 ms | $0.00000 | All 3 passes clean |
-| T4 | 3/3 | **100.0%** | 47.06 ms | $0.00000 | All 3 passes clean |
-| T5 | 3/3 | **100.0%** | 287.75 ms | $0.00000 | All 3 passes clean |
+| T1 | 3/3 | **100.0%** | 49.23 ms | $0.00000 | All 3 passes clean |
+| T2 | 3/3 | **100.0%** | 48.14 ms | $0.00000 | All 3 passes clean |
+| T3 | 3/3 | **100.0%** | 48.42 ms | $0.00000 | All 3 passes clean |
+| T4 | 3/3 | **100.0%** | 49.74 ms | $0.00000 | All 3 passes clean |
+| T5 | 3/3 | **100.0%** | 235.69 ms | $0.00000 | All 3 passes clean |
 
 ### Provider: `baseline-deterministic` (Model: `rule-engine-v1`)
 | Task | Repetitions | Pass Rate | Avg Latency (ms) | Est. Cost / Task | Failure Notes |
 |---|---|---|---|---|---|
-| T1 | 3/3 | **100.0%** | 16.82 ms | $0.00000 | All 3 passes clean |
-| T2 | 3/3 | **100.0%** | 15.78 ms | $0.00000 | All 3 passes clean |
-| T3 | 3/3 | **100.0%** | 16.97 ms | $0.00000 | All 3 passes clean |
-| T4 | 3/3 | **100.0%** | 17.61 ms | $0.00000 | All 3 passes clean |
-| T5 | 3/3 | **100.0%** | 304.35 ms | $0.00000 | All 3 passes clean |
+| T1 | 3/3 | **100.0%** | 18.90 ms | $0.00000 | All 3 passes clean |
+| T2 | 3/3 | **100.0%** | 19.06 ms | $0.00000 | All 3 passes clean |
+| T3 | 3/3 | **100.0%** | 18.45 ms | $0.00000 | All 3 passes clean |
+| T4 | 3/3 | **100.0%** | 16.88 ms | $0.00000 | All 3 passes clean |
+| T5 | 3/3 | **100.0%** | 172.07 ms | $0.00000 | All 3 passes clean |
 
 ### Provider: `local-ollama-reference` (Model: `llama3.2-3b-m1`)
 | Task | Repetitions | Pass Rate | Avg Latency (ms) | Est. Cost / Task | Failure Notes |
 |---|---|---|---|---|---|
-| T1 | 3/3 | **0.0%** | 456.13 ms | $0.00000 | JSON parse/validation error: Expecting value: line 1 column 1 (char 0) |
-| T2 | 3/3 | **0.0%** | 352.50 ms | $0.00000 | Tool use call failed: Expecting value: line 1 column 1 (char 0) |
-| T3 | 3/3 | **0.0%** | 354.57 ms | $0.00000 | Missing citation or threshold. has_sec=True, has_cite=False |
-| T4 | 3/3 | **100.0%** | 352.63 ms | $0.00000 | All 3 passes clean |
-| T5 | 3/3 | **0.0%** | 1866.16 ms | $0.00000 | Pytest failed after 3 attempts |
+| T1 | 3/3 | **0.0%** | 352.59 ms | $0.00000 | JSON parse/validation error: Expecting value: line 1 column 1 (char 0) |
+| T2 | 3/3 | **0.0%** | 351.29 ms | $0.00000 | Tool use call failed: Expecting value: line 1 column 1 (char 0) |
+| T3 | 3/3 | **0.0%** | 352.31 ms | $0.00000 | Missing citation or threshold. has_sec=True, has_cite=False |
+| T4 | 3/3 | **100.0%** | 352.81 ms | $0.00000 | All 3 passes clean |
+| T5 | 3/3 | **0.0%** | 1635.39 ms | $0.00000 | Pytest failed after 3 attempts |
 
 ### Provider: `openai` (Model: `gpt-4o-mini`)
 > **Status:** ⚠️ UNAVAILABLE — OPENAI_API_KEY env var not set in environment (optional secondary fallback)

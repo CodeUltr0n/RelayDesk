@@ -1,0 +1,21 @@
+# Room message cards — the Switch room transcript is your UI.
+# Judges read these cards. Keep them short, name the evidence, never paste
+# raw logs beyond max_log_echo_lines. Placeholders use str.format() syntax;
+# see src/relaydesk/handoff.py for which fields each template receives.
+
+evidence_card: |
+  [EVIDENCE] Candidate shortlist for this report:
+  {shortlist}
+  Scores rank candidates; they are not calibrated probabilities.
+
+decision_card: |
+  [DECISION] {outcome} (confidence {confidence:.2f})
+  Why: {rationale}
+  Evidence: {evidence}
+  Next: human approval required before anything is sent or merged.
+
+case_record: |
+  [CASE] {case_id} closed as {outcome} — status {status}
+  Approved by: {human_decision_by}
+  Notes:
+  {notes}

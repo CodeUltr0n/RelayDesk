@@ -1,0 +1,36 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "RelayDesk labelled evaluation case",
+  "type": "object",
+  "required": ["case_id", "title", "report", "label", "split"],
+  "properties": {
+    "case_id": { "type": "string", "pattern": "^case_" },
+    "title": { "type": "string", "minLength": 5 },
+    "report": {
+      "type": "object",
+      "required": ["author", "text"],
+      "properties": {
+        "author": { "type": "string" },
+        "text": { "type": "string", "minLength": 10 },
+        "component": { "type": ["string", "null"] },
+        "version": { "type": ["string", "null"] },
+        "first_seen": { "type": ["string", "null"] },
+        "error_signature": { "type": ["string", "null"] }
+      },
+      "additionalProperties": false
+    },
+    "label": { "enum": ["ANSWER", "CLARIFY", "DUPLICATE", "ESCALATE"] },
+    "expected_evidence_ids": {
+      "type": "array",
+      "items": { "type": "string" },
+      "description": "Evidence ids a correct shortlist must surface in top-3. Empty for clarify cases."
+    },
+    "technical_signals": {
+      "type": "boolean",
+      "description": "True if the report carries error/timing signals suggesting a real bug."
+    },
+    "split": { "enum": ["dev", "heldout"] },
+    "notes": { "type": "string" }
+  },
+  "additionalProperties": false
+}

@@ -1,0 +1,13 @@
+{
+  "case_id": "case_clarify_001",
+  "title": "Reports CSV export fails — no version, no error text",
+  "report": {
+    "author": "support-lead",
+    "text": "Customer says the CSV export button in Reports does nothing when clicked. No error message shown. No app version or browser provided."
+  },
+  "label": "CLARIFY",
+  "expected_evidence_ids": [],
+  "technical_signals": false,
+  "split": "dev",
+  "notes": "Best action: one targeted question (app version + browser + timestamp). Never guess an answer."
+}

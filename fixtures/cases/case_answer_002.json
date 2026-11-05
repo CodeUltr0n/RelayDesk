@@ -1,0 +1,18 @@
+{
+  "case_id": "case_answer_002",
+  "title": "Search showing deleted products — answerable from runbook RB-501",
+  "report": {
+    "author": "support-lead",
+    "text": "Customer reports seeing deleted products in search autocomplete. They searched for a product that was removed last month and it still appears. Using search-service v3.2.1.",
+    "component": "search-service",
+    "version": "v3.2.1",
+    "first_seen": "2026-10-29",
+    "error_signature": "stale index cache"
+  },
+  "label": "ANSWER",
+  "expected_evidence_ids": ["search_troubleshooting"],
+  "technical_signals": false,
+  "split": "heldout",
+  "notes": "Runbook RB-501 covers stale search results. Should ground answer in the alias swap resolution."
+}
+

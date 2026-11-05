@@ -1,0 +1,12 @@
+{
+  "id": "INC-1038",
+  "title": "Search autocomplete returns stale results after reindex",
+  "component": "search-service",
+  "version": "v3.2.1",
+  "date": "2026-10-28",
+  "error_signature": "stale index cache",
+  "body": "After the weekly reindex job ran on Oct 28, some autocomplete queries returned products that were removed a month ago. The Elasticsearch index alias was not swapped correctly. Manual alias swap resolved the issue. RCA: reindex script missing alias swap step after bulk load.",
+  "status": "resolved",
+  "assignee": "eng-search"
+}
+

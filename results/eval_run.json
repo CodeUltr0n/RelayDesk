@@ -1,0 +1,107 @@
+{
+  "generated_by": "relaydesk",
+  "results": [
+    {
+      "metrics": {
+        "pipeline": "relaydesk",
+        "split": "dev",
+        "n_cases": 4,
+        "correct_next_action": 1.0,
+        "escalation_precision": 1.0,
+        "escalation_recall": 1.0,
+        "top3_evidence_recall": 1.0,
+        "unsupported_assertion_count": 0,
+        "median_latency_ms": 0.5
+      },
+      "records": [
+        {
+          "case_id": "case_answer_001",
+          "label": "ANSWER",
+          "predicted": "ANSWER",
+          "correct": true,
+          "top3_hit": true,
+          "unsupported_assertions": 0,
+          "latency_ms": 1.5
+        },
+        {
+          "case_id": "case_clarify_001",
+          "label": "CLARIFY",
+          "predicted": "CLARIFY",
+          "correct": true,
+          "top3_hit": true,
+          "unsupported_assertions": 0,
+          "latency_ms": 0.4
+        },
+        {
+          "case_id": "case_dup_001",
+          "label": "DUPLICATE",
+          "predicted": "DUPLICATE",
+          "correct": true,
+          "top3_hit": true,
+          "unsupported_assertions": 0,
+          "latency_ms": 0.4
+        },
+        {
+          "case_id": "case_escalate_001",
+          "label": "ESCALATE",
+          "predicted": "ESCALATE",
+          "correct": true,
+          "top3_hit": true,
+          "unsupported_assertions": 0,
+          "latency_ms": 0.5
+        }
+      ]
+    },
+    {
+      "metrics": {
+        "pipeline": "relaydesk",
+        "split": "heldout",
+        "n_cases": 4,
+        "correct_next_action": 1.0,
+        "escalation_precision": 1.0,
+        "escalation_recall": 1.0,
+        "top3_evidence_recall": 1.0,
+        "unsupported_assertion_count": 0,
+        "median_latency_ms": 0.4
+      },
+      "records": [
+        {
+          "case_id": "case_answer_002",
+          "label": "ANSWER",
+          "predicted": "ANSWER",
+          "correct": true,
+          "top3_hit": true,
+          "unsupported_assertions": 0,
+          "latency_ms": 0.4
+        },
+        {
+          "case_id": "case_clarify_002",
+          "label": "CLARIFY",
+          "predicted": "CLARIFY",
+          "correct": true,
+          "top3_hit": true,
+          "unsupported_assertions": 0,
+          "latency_ms": 0.3
+        },
+        {
+          "case_id": "case_dup_002",
+          "label": "DUPLICATE",
+          "predicted": "DUPLICATE",
+          "correct": true,
+          "top3_hit": true,
+          "unsupported_assertions": 0,
+          "latency_ms": 0.4
+        },
+        {
+          "case_id": "case_escalate_002",
+          "label": "ESCALATE",
+          "predicted": "ESCALATE",
+          "correct": true,
+          "top3_hit": true,
+          "unsupported_assertions": 0,
+          "latency_ms": 0.4
+        }
+      ]
+    }
+  ]
+}
