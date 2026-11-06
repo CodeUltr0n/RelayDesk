@@ -18,6 +18,7 @@ Spec:
 
 from __future__ import annotations
 
+import shlex
 import shutil
 import subprocess
 import sys
@@ -41,24 +42,44 @@ class SandboxError(RuntimeError):
     """Raised when the sandbox cannot be set up safely."""
 
 
+# Characters that could be abused for shell injection or chaining.
+_FORBIDDEN_SHELL_CHARS = frozenset([";", "&", "|", "`", "$", "(", ")", "<", ">", "\n", "\r"])
+
 # Commands that are allowed to run in the sandbox.
-_ALLOWED_COMMANDS = frozenset(
-    ["pytest", "python", "python3", "make"]
-)
+_ALLOWED_COMMANDS = frozenset(["pytest", "python", "python3", "make"])
 
 
-def _validate_commands(commands: list[str]) -> None:
-    """Ensure only allow-listed binaries are invoked."""
-    for cmd in commands:
-        parts = cmd.split()
-        if not parts:
-            raise SandboxError(f"empty command in list: {commands}")
-        binary = parts[0]
-        if binary not in _ALLOWED_COMMANDS:
+def _parse_and_validate_command(cmd: str) -> list[str]:
+    """Parse command into argv tokens and ensure strictly allow-listed binary with NO shell chaining."""
+    if not isinstance(cmd, str) or not cmd.strip():
+        raise SandboxError(f"empty or invalid command: {cmd!r}")
+
+    for char in _FORBIDDEN_SHELL_CHARS:
+        if char in cmd:
             raise SandboxError(
-                f"command '{binary}' is not in the allow-list: "
-                f"{sorted(_ALLOWED_COMMANDS)}"
+                f"shell operator or metacharacter {char!r} is strictly forbidden: {cmd!r}"
             )
+
+    try:
+        parts = shlex.split(cmd)
+    except Exception as exc:
+        raise SandboxError(f"failed to parse command tokens: {exc}") from exc
+
+    if not parts:
+        raise SandboxError(f"empty command after tokenization: {cmd!r}")
+
+    binary = parts[0]
+    if binary not in _ALLOWED_COMMANDS:
+        raise SandboxError(
+            f"command '{binary}' is not in the allow-list: "
+            f"{sorted(_ALLOWED_COMMANDS)}"
+        )
+    return parts
+
+
+def _validate_commands(commands: list[str]) -> list[list[str]]:
+    """Ensure all commands are valid argv arrays with allow-listed binaries."""
+    return [_parse_and_validate_command(cmd) for cmd in commands]
 
 
 def run_tests(service_dir: str, commands: list[str], policy: dict) -> TestRunResult:
@@ -68,7 +89,7 @@ def run_tests(service_dir: str, commands: list[str], policy: dict) -> TestRunRes
     inside it, enforces a timeout, and returns a TestRunResult with the
     last N lines of combined output (N from policy.safety.max_log_echo_lines).
     """
-    _validate_commands(commands)
+    parsed_commands = _validate_commands(commands)
 
     safety = policy.get("safety", {})
     sandbox_cfg = safety.get("sandbox", {})
@@ -108,13 +129,13 @@ def run_tests(service_dir: str, commands: list[str], policy: dict) -> TestRunRes
     start = time.monotonic()
 
     try:
-        for cmd in commands:
+        for cmd_args in parsed_commands:
             elapsed = time.monotonic() - start
             remaining = max(1, timeout_s - int(elapsed))
             try:
                 result = subprocess.run(
-                    cmd,
-                    shell=True,
+                    cmd_args,
+                    shell=False,
                     cwd=str(work_dir),
                     capture_output=True,
                     text=True,
@@ -128,7 +149,9 @@ def run_tests(service_dir: str, commands: list[str], policy: dict) -> TestRunRes
             except subprocess.TimeoutExpired:
                 timed_out = True
                 passed = False
-                all_output.append(f"[TIMEOUT] Command '{cmd}' exceeded {remaining}s")
+                all_output.append(
+                    f"[TIMEOUT] Command '{' '.join(cmd_args)}' exceeded {remaining}s"
+                )
                 break
     finally:
         # Clean up the disposable copy.

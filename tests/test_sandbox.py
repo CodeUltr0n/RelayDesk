@@ -42,6 +42,21 @@ def test_sandbox_rejects_unauthorized_command():
         )
 
 
+def test_sandbox_rejects_shell_injection():
+    """Shell chaining operators and metacharacters must be rejected even with allow-listed binary."""
+    malicious_commands = [
+        "pytest ; rm -rf /tmp/test",
+        "pytest && echo injected",
+        "pytest | cat /etc/passwd",
+        "pytest `whoami`",
+        "pytest $(uname -a)",
+        "python3 -c 'print(1)' > /tmp/hacked",
+    ]
+    for cmd in malicious_commands:
+        with pytest.raises(SandboxError, match="shell operator or metacharacter"):
+            run_tests(str(BUGGY_SERVICE), [cmd], POLICY)
+
+
 def test_sandbox_rejects_nonexistent_directory():
     with pytest.raises(SandboxError):
         run_tests("/nonexistent/dir", ["python3 -m unittest"], POLICY)

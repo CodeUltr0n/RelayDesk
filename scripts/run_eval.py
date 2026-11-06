@@ -106,11 +106,19 @@ class RelayDeskPipeline:
         decision = decide(report, scored, self._policy)
 
         latency = (time.perf_counter() - start) * 1000
+
+        # Validate that cited evidence IDs actually exist in the knowledge corpus.
+        # An unsupported assertion occurs if a decision cites an ungrounded ID or drafts an answer without evidence.
+        known_ids = {item.evidence_id for item in self._index.get("items", [])}
+        unsupported = sum(1 for eid in decision.supporting_evidence if eid not in known_ids)
+        if decision.outcome.value == "ANSWER" and not decision.supporting_evidence:
+            unsupported += 1
+
         return Prediction(
             outcome=decision.outcome.value,
             evidence_ids=decision.supporting_evidence,
             draft_response=decision.draft_response,
-            unsupported_assertions=0,
+            unsupported_assertions=unsupported,
             latency_ms=latency,
         )
 
@@ -133,9 +141,12 @@ def evaluate(cases: list[dict], pipeline) -> dict:
     for case in cases:
         pred = pipeline.predict(case)
         expected_ids = set(case.get("expected_evidence_ids", []))
-        top3_hit = True
         if expected_ids:
             top3_hit = bool(expected_ids & set(pred.evidence_ids))
+        else:
+            # When no past evidence is expected (e.g. novel defect or clarification),
+            # verify that the pipeline did not hallucinate an unrelated past ticket/runbook.
+            top3_hit = bool(pred.outcome in ("ESCALATE", "CLARIFY"))
         records.append(
             {
                 "case_id": case["case_id"],

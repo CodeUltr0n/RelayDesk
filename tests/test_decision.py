@@ -80,6 +80,26 @@ def test_low_score_escalates_with_reason():
     assert d.escalation_reason
 
 
+def test_full_technical_signals_novel_defect_escalates_at_score_70():
+    """A report with complete technical context and no matching duplicate ticket or runbook
+    must escalate as a novel defect rather than stall in clarify, even with candidate score 0.70."""
+    full_report = IssueReport(
+        report_id="R2",
+        author="lead",
+        text="Customer reports discount calculation failure in price_calculator on 10% discount orders.",
+        component="checkout-service",
+        version="v2.14.0",
+        first_seen="2026-11-05",
+        error_signature="discount calculation failure in price_calculator",
+    )
+    # Candidate score 0.70 (below duplicate_min 0.75, not an answerable runbook)
+    candidate = _candidate(0.70, EvidenceType.TICKET, "INC-1042")
+    d = decide(full_report, [candidate], POLICY)
+    assert d.outcome == DecisionOutcome.ESCALATE
+    assert "Novel defect" in d.escalation_reason
+    assert d.confidence == 0.70
+
+
 def test_never_answer_without_candidates():
     d = decide(_report(), [], POLICY)
     assert d.outcome != DecisionOutcome.ANSWER

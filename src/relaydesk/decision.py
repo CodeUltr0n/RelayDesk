@@ -121,15 +121,16 @@ def decide(
         )
 
     # --- Rule 3: CLARIFY ---
-    # Top score in [clarify_floor, answer_min),
-    # OR the report lacks technical signals (no error code/trace/signature) and has missing fields.
     from relaydesk.normalize import extract_error_signature, missing_fields
 
     sig = report.error_signature or extract_error_signature(report.text)
     gaps = missing_fields(report)
+    has_full_technical_signals = bool(report.component and report.version and sig and not gaps)
 
-    # Clarify if score is moderate OR report has no error signature and is missing fields
-    if best.score >= clarify_floor or (sig is None and gaps):
+    # Only request clarification if there are genuine context gaps or missing technical signals.
+    # If the user already provided full technical signals and no existing ticket/runbook covers it,
+    # it is a novel defect that must be escalated for investigation, not stalled with redundant questions.
+    if not has_full_technical_signals and (best.score >= clarify_floor or (sig is None and gaps)):
         missing_str = ", ".join(gaps) if gaps else "reproduction details"
         return Decision(
             report_id=report.report_id,
@@ -142,24 +143,29 @@ def decide(
             ),
             supporting_evidence=[best.evidence.evidence_id],
             rationale=(
-                f"Score {best.score:.2f} or missing report context ({missing_str}). "
+                f"Incomplete technical context ({missing_str}) with candidate score {best.score:.2f}. "
                 f"Requesting targeted clarification from the user."
             ),
         )
 
-    # --- Rule 4: ESCALATE (fallback) ---
+    # --- Rule 4: ESCALATE (fallback for novel defects or unconfident matches) ---
+    escalation_reason = (
+        f"Novel defect in {report.component or 'service'} {report.version or ''}: "
+        f"top evidence scored {best.score:.2f}, below duplicate threshold {duplicate_min}. "
+        f"Escalating to engineering for sandbox reproduction and fix."
+        if has_full_technical_signals
+        else f"Top evidence [{best.evidence.evidence_id}] scored only {best.score:.2f}, below clarify floor {clarify_floor}. "
+        f"No confident match found — escalating to engineering."
+    )
     return Decision(
         report_id=report.report_id,
         outcome=DecisionOutcome.ESCALATE,
         confidence=best.score,
-        escalation_reason=(
-            f"Top evidence [{best.evidence.evidence_id}] scored only "
-            f"{best.score:.2f}, below clarify floor {clarify_floor}. "
-            f"No confident match found — escalating to engineering."
-        ),
+        escalation_reason=escalation_reason,
         supporting_evidence=[best.evidence.evidence_id],
         rationale=(
-            f"All candidates below clarify floor {clarify_floor}. "
-            f"Escalating for manual engineering review."
+            "Full technical context provided but no confident match — novel defect."
+            if has_full_technical_signals
+            else f"All candidates below clarify floor {clarify_floor}. Escalating for manual engineering review."
         ),
     )

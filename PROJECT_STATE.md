@@ -45,7 +45,7 @@
 
 ### Next (Nov 6: Final Polish & Submission)
 
-1. Verify Switch Console room initialization (`config/room-config.draft.yaml`).
+1. [x] Switch Console room live and connected to Discord bridge (`#support-triage`) with `@relaydesk-triager` and `@relaydesk-investigator`.
 2. Record 3-minute demo screencast following `docs/demo-script.md`.
 3. Submit before 20:00 IST on Nov 6.
 

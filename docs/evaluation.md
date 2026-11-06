@@ -4,6 +4,8 @@
 
 ## Benchmark Methodology
 
+> **Scope & Discipline:** This benchmark is an 8-case synthetic verification suite designed to validate pipeline routing, evidence grounding, and latency bounds across all four decision tracks without dataset leakage.
+
 Evaluation cases are split into:
 - **`dev` split (n=4)**: Development tuning split representing diverse support scenarios.
 - **`heldout` split (n=4)**: Strict held-out evaluation set untouched during policy weight calibration.

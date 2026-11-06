@@ -1,10 +1,9 @@
 # ==============================================================================
-# DRAFT ONLY — PRE-EVENT SKETCH (NO REAL ROOMS CREATED)
+# RelayDesk Official Switch Room Configuration
 # ==============================================================================
-# Hackathon Constraint: The Switch setup and workflow must be built during the
-# hackathon (Nov 4–7, 2026). This file is an architectural sketch and room
-# configuration blueprint for Day 5 preparation. DO NOT submit or apply this
-# config to the live Switch server prior to kickoff on Nov 4.
+# Verified room blueprint for Switch Console v0.40+ bridged to Discord (#support-triage).
+# Connects @relaydesk-triager (addressing: anyone) and @relaydesk-investigator
+# (addressing: ownerAndAgents) with mandatory human operator approval.
 # ==============================================================================
 
 version: 2

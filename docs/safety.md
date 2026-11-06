@@ -17,7 +17,7 @@ Customer tickets, error traces, runbooks, and logs are treated as strictly **unt
 ### 3. Disposable Execution Sandbox
 When `relaydesk-investigator` runs verification tests on a reported regression:
 - **Disposable Temp Copies**: Tests run strictly in an ephemeral temporary directory (`tempfile.mkdtemp`), completely isolated from the working repository.
-- **Fixed Command Allow-List**: Only explicitly vetted commands are permitted (`pytest`, `python3`, `make`). Shell command injection and arbitrary binary execution are blocked by `SandboxError`.
+- **Fixed Command Allow-List & Shell Injection Defense**: Commands are parsed strictly into argv arrays using `shlex.split`, all shell metacharacters (`;`, `&`, `|`, `>`, `<`, `$`, etc.) are explicitly blocked, and subprocesses run strictly with `shell=False`. Only vetted binaries (`pytest`, `python`, `python3`, `make`) are allowed. Arbitrary command execution and shell chaining are completely blocked with `SandboxError`.
 - **Hard Timeouts**: Execution is bounded by `policy.safety.sandbox.timeout_s` (120 seconds default), killing processes on expiry.
 - **Network Isolation**: Best-effort proxy blackholing (`http_proxy=http://127.0.0.1:0`) prevents outbound telemetry exfiltration or credential leaks during test runs.
 
