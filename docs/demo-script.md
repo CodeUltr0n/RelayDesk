@@ -19,14 +19,26 @@
 ## 2. Word-for-Word Spoken Narration & Action Guide
 
 ```
-TIMECODE: 0:00 – 0:30 | THE INTRO & THE PROBLEM
+TIMECODE: 0:00 – 0:07 | PAPER ANIMATION INTRO
 ```
 
 ### 🎬 Action on Screen:
-Show Discord `#support-triage` channel with the RelayDesk header.
+Play your 7-second custom paper animation (`assets/ketan_paper_animation.mp4`) full screen. Your name and title animate on screen: **Ketan Chokkara — AI Engineer & Data Scientist**.
 
 ### 🎙️ Spoken Narration:
-> *"Hi everyone! I'm **Ketan Chokkara**, an AI Engineer and Data Scientist from India. Today, I'm excited to present **RelayDesk** — an evidence-gated customer support triage and engineering escalation system built for the **Flip the Switch Hackathon** on **Switch AI**.*
+> *"Hi everyone! I'm **Ketan Chokkara**, an AI Engineer and Data Scientist from India..."*
+
+---
+
+```
+TIMECODE: 0:07 – 0:35 | THE PROBLEM & RELAYDESK OVERVIEW
+```
+
+### 🎬 Action on Screen:
+Cut/fade smoothly from the animation into your Discord `#support-triage` channel, showing `@relaydesk-triager` and `@relaydesk-investigator` ready in the room.
+
+### 🎙️ Spoken Narration:
+> *"...and today, I'm excited to present **RelayDesk** — an evidence-gated customer support triage and engineering escalation system built for the **Flip the Switch Hackathon** on **Switch AI**.*
 >
 > *Every tech company faces a painful trade-off: either support teams over-escalate routine issues and drown engineers in duplicate tickets, or ungrounded AI chatbots hallucinate false answers to customers.*
 >

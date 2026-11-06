@@ -2,7 +2,7 @@
 
 > **Evidence-Gated Customer Support Triage and Engineering Escalation**  
 > Built for the **Flip the Switch** Hackathon (Nov 4–7, 2026) by **WeMakeDevs** + **Switch AI**  
-> **Track:** Best Business Workflow · **Team:** Solo (Ketan Kumar Chokkara)
+> **Track:** Best Business Workflow · **Team:** Solo (Ketan Kumar Chokkara — AI Engineer & Data Scientist)
 
 ---
 
