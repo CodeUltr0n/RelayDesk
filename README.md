@@ -4,6 +4,10 @@
 > Built for the **Flip the Switch** Hackathon (Nov 4–7, 2026) by **WeMakeDevs** + **Switch AI**  
 > **Track:** Best Business Workflow · **Team:** Solo (Ketan Kumar Chokkara — AI Engineer & Data Scientist)
 
+<p align="center">
+  <img src="assets/ketan_paper_animation.gif" alt="Ketan Chokkara — AI Engineer & Data Scientist" width="70%" style="border-radius: 8px; box-shadow: 0 4px 12px rgba(0,0,0,0.15);" />
+</p>
+
 ---
 
 ## The Problem
