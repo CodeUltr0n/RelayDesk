@@ -227,6 +227,7 @@ relaydesk/
 
 - [Architecture Design](docs/architecture.md)
 - [Benchmark Evaluation Report](docs/evaluation.md)
+- [Reviewer & Judge Evaluation Report](docs/reviewer-evaluation-report.md)
 - [Safety & Isolation Model](docs/safety.md)
 - [3-Minute Demo Video Script](docs/demo-script.md)
 - [Technical Blog Post](docs/blog-post.md)
