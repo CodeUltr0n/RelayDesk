@@ -80,9 +80,9 @@ $$S = 0.35 \cdot M_{\text{error}} + 0.25 \cdot M_{\text{comp\_ver}} + 0.20 \cdot
 ### 2. Disposable Sandbox Execution
 When a novel defect is escalated, `@relaydesk-investigator` never runs tests in production or inside the main codebase. Instead, `relaydesk/sandbox.py`:
 - Copies the suspect service into a **disposable temporary directory** (`tempfile.mkdtemp()`).
-- Restricts commands strictly to an allow-list (`pytest`, `python3`, `make`).
-- Sets execution timeouts (default 30 seconds) and isolates network access.
-- Caches and truncates test output tails to prevent log flooding and prompt injection.
+- Restricts commands strictly to allow-listed binaries (`pytest`, `python`, `python3`, `make`) parsed via `shlex.split`, running with `shell=False` to eliminate shell injection vulnerabilities.
+- Enforces strict execution timeouts (`timeout_s: 120`) and proxy blackholing for network isolation.
+- Caches and truncates test output tails (`max_log_echo_lines: 20`) to prevent log flooding and prompt injection.
 
 ---
 
@@ -134,11 +134,25 @@ E       AssertionError: Got 134.98, expected 134.97
 Recommendation: Create an engineering ticket for checkout-service to switch decimal rounding to ROUND_HALF_UP in price_calculator.py. Awaiting human operator approval.
 ```
 
+### Scenario 3: Grounded Runbook Resolution (ANSWER)
+**Human:**
+> `@relaydesk-triager Customer reports stale search results in search autocomplete on search-service v3.2.1. Products that were deleted yesterday still appear in search results.`
+
+**`@relaydesk-triager`:**
+> Matches runbook `search_troubleshooting` (RB-501) and resolved ticket `INC-1038`. Outputs `[DECISION] ANSWER (grounded in runbook RB-501)`. Drafts verified operational steps: manual Elasticsearch alias swap (`POST /_aliases`) and autocomplete cache TTL invalidation, pausing for human approval.
+
+### Scenario 4: Smart Diagnostic Clarification (CLARIFY)
+**Human:**
+> `@relaydesk-triager Customer says the CSV export button in Reports does nothing when clicked. No error message shown. No app version or browser provided.`
+
+**`@relaydesk-triager`:**
+> Refuses to hallucinate speculative answers. Detects missing technical context and outputs `[DECISION] CLARIFY` with a single targeted diagnostic question requesting app version, browser details, and developer console logs.
+
 ---
 
 ## 6. Rigorous Benchmark Evaluation
 
-To prove that RelayDesk performs reliably beyond one-off demos, we built an automated benchmark suite (`scripts/run_eval.py`) evaluated across 8 synthetic incident cases split into development and held-out test sets:
+To prove that RelayDesk performs reliably beyond one-off demos, we built an automated benchmark suite (`scripts/run_eval.py`) evaluated across 8 synthetic incident cases split into development and held-out test sets, backed by 27 passing unit and integration tests:
 
 | Metric | Null Baseline (Always Escalate) | RelayDesk (Dev Split) | RelayDesk (Held-Out Split) |
 |---|---|---|---|

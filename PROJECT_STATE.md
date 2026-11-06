@@ -17,9 +17,9 @@
   - `src/relaydesk/handoff.py`: Standard room card formatting for `[EVIDENCE]`, `[DECISION]`, and `[CASE]` cards.
   - `src/relaydesk/sandbox.py`: Isolated verification runner with disposable copies, command allow-listing, timeout bounds, and network isolation flags.
   - `src/relaydesk/mcp_server.py`: Model Context Protocol server exposing `triage_issue` tool over stdio JSON-RPC.
-- [x] **Full test suite passing (25/25 tests):**
-  - Contract tests: `test_schemas.py`, `test_scoring.py`, `test_decision.py`.
-  - Sandbox tests: `test_sandbox.py` (detects failing reproduction tests in `fixtures/buggy_service`).
+- [x] **Full test suite passing (27/27 tests):**
+  - Contract tests: `test_schemas.py`, `test_scoring.py`, `test_decision.py` (7 tests).
+  - Sandbox tests: `test_sandbox.py` (detects failing reproduction tests in `fixtures/buggy_service` and blocks shell injection attacks).
   - MCP tests: `test_mcp.py` (initialize, tools/list, tools/call).
   - End-to-end integration: `test_end_to_end.py` (tests all 4 outcome tracks and room card rendering).
 - [x] **Evaluation benchmark verified (100% across all metrics):**
