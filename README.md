@@ -2,7 +2,8 @@
 
 > **Evidence-Gated Customer Support Triage and Engineering Escalation**  
 > Built for the **Flip the Switch** Hackathon (Nov 4–7, 2026) by **WeMakeDevs** + **Switch AI**  
-> **Track:** Best Business Workflow · **Team:** Solo (Ketan Kumar Chokkara — AI Engineer & Data Scientist)
+> **Track:** Best Business Workflow · **Team:** Solo (Ketan Kumar Chokkara — AI Engineer & Data Scientist)  
+> 📺 **Demo Video:** [https://youtu.be/Gi6qcB_jUVQ](https://youtu.be/Gi6qcB_jUVQ)
 
 <p align="center">
   <img src="assets/ketan_paper_animation.gif" alt="Ketan Chokkara — AI Engineer & Data Scientist" width="70%" style="border-radius: 8px; box-shadow: 0 4px 12px rgba(0,0,0,0.15);" />
@@ -225,6 +226,7 @@ relaydesk/
 
 ## Documentation & References
 
+- [3-Minute Demo Video (YouTube)](https://youtu.be/Gi6qcB_jUVQ)
 - [Architecture Design](docs/architecture.md)
 - [Benchmark Evaluation Report](docs/evaluation.md)
 - [Reviewer & Judge Evaluation Report](docs/reviewer-evaluation-report.md)

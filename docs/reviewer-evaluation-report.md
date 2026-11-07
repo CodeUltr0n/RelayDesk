@@ -5,6 +5,7 @@
 > **Author & Lead:** Ketan Kumar Chokkara — AI Engineer & Data Scientist from India ([@CodeUltr0n](https://github.com/CodeUltr0n))  
 > **Repository:** [https://github.com/CodeUltr0n/RelayDesk](https://github.com/CodeUltr0n/RelayDesk)  
 > **Verified Commit:** `62fc09b` (Branch: `main`)  
+> **Demo Video (YouTube):** [https://youtu.be/Gi6qcB_jUVQ](https://youtu.be/Gi6qcB_jUVQ)  
 > **Status:** Fully Hardened, Tested (27/27 tests), Benchmark Verified (100% held-out), and Live in Discord
 
 ---
@@ -185,3 +186,4 @@ flowchart LR
 RelayDesk solves a foundational enterprise problem: **how to deploy AI in frontline operations without hallucinating customer advice or overwhelming developers with duplicate noise.**
 
 By combining Switch's multi-agent room collaboration with deterministic scoring, sandboxed reproduction, and mandatory human sign-off, RelayDesk turns customer support into a reliable, evidence-gated engineering workflow.
+

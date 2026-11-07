@@ -2,6 +2,8 @@
 
 *By Ketan Kumar Chokkara — AI Engineer & Data Scientist from India ([@CodeUltr0n](https://github.com/CodeUltr0n)) — Built for the Flip the Switch Hackathon (Nov 4–7, 2026)*
 
+> 📺 **Watch the 3-Minute Demo Video on YouTube:** [https://youtu.be/Gi6qcB_jUVQ](https://youtu.be/Gi6qcB_jUVQ)
+
 ---
 
 ## 1. The Frontline Support Dilemma
@@ -87,6 +89,8 @@ When a novel defect is escalated, `@relaydesk-investigator` never runs tests in 
 ---
 
 ## 5. Live Discord Walkthrough
+
+> 📺 **Watch the live multi-agent execution in action:** [https://youtu.be/Gi6qcB_jUVQ](https://youtu.be/Gi6qcB_jUVQ)
 
 Here is what the workflow looks like in practice inside our bridged Discord channel:
 
@@ -177,6 +181,7 @@ To prove that RelayDesk performs reliably beyond one-off demos, we built an auto
 3. **Safety First:** Sandboxed reproduction ensures agents can run automated diagnostic tests without risking the host system or production data.
 
 ### Try it out!
+- **Demo Video (YouTube):** [https://youtu.be/Gi6qcB_jUVQ](https://youtu.be/Gi6qcB_jUVQ)
 - **GitHub Repository:** [https://github.com/CodeUltr0n/RelayDesk](https://github.com/CodeUltr0n/RelayDesk)
 - **Quickstart:** Run `make test` and `make eval-heldout` in under 30 seconds!
 

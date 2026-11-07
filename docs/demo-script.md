@@ -4,6 +4,7 @@
 > **Presenter:** Ketan Kumar Chokkara — AI Engineer & Data Scientist from India ([@CodeUltr0n](https://github.com/CodeUltr0n))  
 > **Project:** RelayDesk (Evidence-Gated Multi-Agent Support Triage)  
 > **Target Duration:** Exactly 3 Minutes (180 seconds)  
+> **Live Demo Video (YouTube):** [https://youtu.be/Gi6qcB_jUVQ](https://youtu.be/Gi6qcB_jUVQ)  
 > **Surface:** Discord (`#support-triage` via Switch Bridge) + Terminal (`make test` / `make eval-heldout`)
 
 ---
