@@ -1,139 +1,135 @@
 1
 00:00:00,000 --> 00:00:06,800
-[Custom Paper Animation Intro — Ketan Chokkara | AI Engineer & Data Scientist]
+Greetings everyone ! I'm Ketan Chokkara, an AI Engineer and Data Scientist from India.
 
 2
-00:00:06,800 --> 00:00:11,500
-Hi everyone! I'm Ketan Chokkara, an AI Engineer and Data Scientist from India.
-
-3
-00:00:11,500 --> 00:00:18,500
+00:00:06,800 --> 00:00:15,000
 Today, I'm excited to present RelayDesk — an evidence-gated customer support triage and engineering escalation system...
 
-4
-00:00:18,500 --> 00:00:23,000
+3
+00:00:15,000 --> 00:00:20,500
 ...built for the Flip the Switch Hackathon on Switch AI.
 
-5
-00:00:23,000 --> 00:00:28,500
+4
+00:00:20,500 --> 00:00:26,500
 Every tech company faces a painful trade-off: either support teams over-escalate routine issues...
 
-6
-00:00:28,500 --> 00:00:33,000
+5
+00:00:26,500 --> 00:00:32,000
 ...and drown engineers in duplicate tickets, or ungrounded AI chatbots hallucinate false answers.
 
-7
-00:00:33,000 --> 00:00:39,000
+6
+00:00:32,000 --> 00:00:38,500
 RelayDesk solves this by coordinating human leads and autonomous Switch agents in a shared room...
 
-8
-00:00:39,000 --> 00:00:46,000
+7
+00:00:38,500 --> 00:00:46,000
 ...where every single triage decision is strictly evidence-gated, and zero customer-facing action is taken without human approval.
 
-9
+8
 00:00:46,000 --> 00:00:51,500
 Let's look at Scenario 1: A customer reports a checkout 500 error after this morning's release.
 
-10
+9
 00:00:51,500 --> 00:00:57,000
 Watch how our frontline agent, @relaydesk-triager, handles this in real time.
 
-11
+10
 00:00:57,000 --> 00:01:03,500
 It normalizes the unstructured text, extracting the component, version, and exact error signature.
 
-12
+11
 00:01:03,500 --> 00:01:08,000
 It queries our deterministic index and renders this formatted Evidence Card.
 
-13
+12
 00:01:08,000 --> 00:01:15,000
 Notice the multi-feature score: 0.86 confidence, driven by symptom and version alignment against open incident INC-1042.
 
-14
+13
 00:01:15,000 --> 00:01:20,500
 Because 0.86 exceeds our duplicate threshold of 0.75, it issues a DECISION DUPLICATE card.
 
-15
+14
 00:01:20,500 --> 00:01:28,000
 Notice the critical safety gate: It halts with 'Awaiting human operator approval'. No customer reply is sent until the lead signs off.
 
-16
+15
 00:01:28,000 --> 00:01:34,000
 Now let's see what happens with a brand-new, novel defect in Scenario 2.
 
-17
+16
 00:01:34,000 --> 00:01:40,500
 Here, a customer reports a discount calculation failure in price_calculator on 10% discount orders.
 
-18
+17
 00:01:40,500 --> 00:01:46,000
 @relaydesk-triager evaluates it against the knowledge base. The top candidate score is only 0.70...
 
-19
+18
 00:01:46,000 --> 00:01:52,500
 ...below our duplicate threshold. Recognizing this novel code defect, it selects DECISION ESCALATE...
 
-20
+19
 00:01:52,500 --> 00:01:57,500
 ...and tags our second agent, @relaydesk-investigator.
 
-21
+20
 00:01:57,500 --> 00:02:04,000
 This is where Switch's multi-agent power shines: @relaydesk-investigator wakes up via agent-to-agent delegation.
 
-22
+21
 00:02:04,000 --> 00:02:11,500
 Rather than guessing the cause, it copies the service into an isolated, disposable temporary sandbox and runs our pytest suite.
 
-23
+22
 00:02:11,500 --> 00:02:16,000
 Look at the output card: REPRODUCTION RESULT — Bug Confirmed!
 
-24
+23
 00:02:16,000 --> 00:02:22,500
 It captures the exact assertion failure — 134.98 versus expected 134.97...
 
-25
+24
 00:02:22,500 --> 00:02:29,000
 ...and identifies the exact root cause: the discount quantizer was using ROUND_DOWN instead of ROUND_HALF_UP!
 
-26
+25
 00:02:29,000 --> 00:02:35,500
 It packages a ready-to-fix engineering ticket with full reproduction proof, awaiting operator sign-off.
 
-27
+26
 00:02:35,500 --> 00:02:40,500
 RelayDesk completes the full workflow with two more tracks:
 
-28
+27
 00:02:40,500 --> 00:02:48,000
 In Scenario 3, for stale search results, it grounds a verified answer from Runbook RB-501, drafting resolution steps.
 
-29
+28
 00:02:48,000 --> 00:02:56,000
 In Scenario 4, when given a vague report with zero technical context, it refuses to hallucinate, issuing a DECISION CLARIFY card with a targeted diagnostic question.
 
-30
+29
 00:02:56,000 --> 00:03:02,000
 Finally, let's look at the engineering rigor in the terminal:
 
-31
+30
 00:03:02,000 --> 00:03:07,500
 Running pytest — all 27 unit, integration, and hardened sandbox tests pass in just 0.2 seconds.
 
-32
+31
 00:03:07,500 --> 00:03:15,000
 And on our strict held-out benchmark split, RelayDesk delivers 100% decision accuracy, 100% escalation precision, and 100% recall...
 
-33
+32
 00:03:15,000 --> 00:03:20,000
 ...with zero unsupported assertions and a median latency of under 0.5 milliseconds!
 
-34
+33
 00:03:20,000 --> 00:03:26,000
 RelayDesk brings deterministic safety and human oversight to multi-agent support workflows with Switch.
 
-35
+34
 00:03:26,000 --> 00:03:31,000
 The code is open source on GitHub. Thank you to WeMakeDevs and Switch AI!
