@@ -2,7 +2,7 @@
 
 *By Ketan Kumar Chokkara — AI Engineer & Data Scientist from India ([@CodeUltr0n](https://github.com/CodeUltr0n)) — Built for the Flip the Switch Hackathon (Nov 4–7, 2026)*
 
-> 📺 **Watch the 3-Minute Demo Video on YouTube:** [https://youtu.be/Gi6qcB_jUVQ](https://youtu.be/Gi6qcB_jUVQ)
+> 📺 **Watch the Demo Video on YouTube:** [https://youtu.be/Gi6qcB_jUVQ](https://youtu.be/Gi6qcB_jUVQ)
 
 ---
 

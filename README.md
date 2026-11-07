@@ -214,7 +214,7 @@ relaydesk/
 │   ├── architecture.md          # In-depth architectural design
 │   ├── evaluation.md            # Detailed benchmark breakdown
 │   ├── safety.md                # Security, isolation, and untrusted data model
-│   ├── demo-script.md           # 3-minute judged screencast walkthrough
+│   ├── demo-script.md           # Live workflow walkthrough demo script
 │   └── blog-post.md             # In-depth technical writeup for hackathon submission
 ├── scripts/
 │   └── run_eval.py              # Reproducible benchmark runner
@@ -226,12 +226,12 @@ relaydesk/
 
 ## Documentation & References
 
-- [3-Minute Demo Video (YouTube)](https://youtu.be/Gi6qcB_jUVQ)
+- [Demo Video (YouTube)](https://youtu.be/Gi6qcB_jUVQ)
 - [Architecture Design](docs/architecture.md)
 - [Benchmark Evaluation Report](docs/evaluation.md)
 - [Reviewer & Judge Evaluation Report](docs/reviewer-evaluation-report.md)
 - [Safety & Isolation Model](docs/safety.md)
-- [3-Minute Demo Video Script](docs/demo-script.md)
+- [Demo Video Script](docs/demo-script.md)
 - [Technical Blog Post](docs/blog-post.md)
 - [Switch Integration Notes](notes/integration-notes.md)
 - [Bridge Configuration Guide](notes/bridges.md)

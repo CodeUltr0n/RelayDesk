@@ -1,9 +1,9 @@
-# RelayDesk — Official 3-Minute Hackathon Demo Video Script
+# RelayDesk — Official Hackathon Demo Video Walkthrough Script
 
 > **Target Track:** Best Business Workflow ($2,000)  
 > **Presenter:** Ketan Kumar Chokkara — AI Engineer & Data Scientist from India ([@CodeUltr0n](https://github.com/CodeUltr0n))  
 > **Project:** RelayDesk (Evidence-Gated Multi-Agent Support Triage)  
-> **Target Duration:** Exactly 3 Minutes (180 seconds)  
+> **Duration:** 4-Minute Walkthrough Video  
 > **Live Demo Video (YouTube):** [https://youtu.be/Gi6qcB_jUVQ](https://youtu.be/Gi6qcB_jUVQ)  
 > **Surface:** Discord (`#support-triage` via Switch Bridge) + Terminal (`make test` / `make eval-heldout`)
 
@@ -138,8 +138,8 @@ Then run:
 
 ## 3. Post-Recording Checklist
 
-- [ ] Video length is between **2:30 and 3:00 minutes** (under the 3-minute limit).
-- [ ] Voice audio is clear and audible.
-- [ ] Discord text and terminal text are sharp and readable.
-- [ ] Upload video to **YouTube (Unlisted or Public)** or **Loom**.
-- [ ] Copy the video link into the submission form at [wemakedevs.org/hackathons/switch](https://www.wemakedevs.org/hackathons/switch).
+- [x] Video uploaded to **YouTube**: [https://youtu.be/Gi6qcB_jUVQ](https://youtu.be/Gi6qcB_jUVQ).
+- [x] Includes chapter timestamps in description for fast judge navigation.
+- [x] Voice audio is clear and audible.
+- [x] Discord text and terminal text are sharp and readable.
+- [x] Copy the video link into the submission form at [wemakedevs.org/hackathons/switch](https://www.wemakedevs.org/hackathons/switch).
